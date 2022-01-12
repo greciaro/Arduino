@@ -18,11 +18,11 @@ void setup() {
 
 void loop() {
 
-  if (digitalRead(Lswitch)== HIGH){
+  if (digitalRead(Lswitch)== LOW){
     //Serial.println("door is innactive");
   }
 
-  if (digitalRead(Lswitch)== LOW){
+  if (digitalRead(Lswitch)== HIGH){
     Serial.println("door is active");
   
     for (pos = 0; pos <= 180; pos += 1){ //goes from 0 degrees to 350 degrees
