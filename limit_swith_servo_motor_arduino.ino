@@ -18,11 +18,19 @@ void setup() {
 
 void loop() {
 
-  servo.detach(); // This indicates the motor to stop
-  delay(2000);  // The motor will remained stopped for 2 seconds 
-  servo.attach(7);  //This re-attach the servo to pin #7
+  servo.detach(); // telling the motor to stop
+  delay(2000);  // motor will remained stopped for 2 seconds 
+  servo.attach(7);  //re-attach the servo to pin #7
+  servo.write(180); // telling the motor to rotate continously
+  delay(5000);  // motor will continue rotating for 5 seconds
   
+  servo.detach(); // telling the motor to stop
+  delay(15000);  // motor will remained stopped for 15 seconds 
 
+  servo.attach(7);  //re-attach the servo to pin #7
+  servo.write(0); // telling the motor to rotate continously
+  delay(5000);  // motor will continue rotating for 5 seconds
+  
   //if (digitalRead(Lswitch)== LOW){
     //Serial.println("door is innactive");
   //}
