@@ -8,23 +8,51 @@ Servo motor; //create servo object to control a servo
 int IRSensor = 2; // connect ir sensor to arduino pin 2 
 int count = 0; //variable to store how many times the door was activated
 int active = 0; //variable to store if the switch was activated
-//int statusSensor = 0;
 int sensoractive = 0;
+int statusSensor = 0;
+int IR_out = LOW;
+
+boolean state = false;
 
 void setup() {
   Serial.begin(9600);  //This value of bits per second is by default
   motor.attach(7); //attaches the servo on pin 7 to the servo object
-  pinMode(IRSensor, INPUT_PULLUP);
+  pinMode(IRSensor, INPUT);
 }
 
 void loop() {
   motor.detach();
 
-  int statusSensor = digitalRead (IRSensor);
+//  void loop() {
+//  IR1_out = digitalRead(IR1);
+//  IR2_out = digitalRead(IR2);
+//  if(IR1_out == LOW) {
+//    increaseAndDisplay();
+//    delay(500);
+//  }
+//  if(IR2_out == LOW) {
+//    decreaseAndDisplay();
+//    delay(500);
+//  } 
+//  delay(100);
+//}
+
   
-  if (statusSensor == 1)
+  Serial.println(digitalRead(IRSensor)); 
+  
+//  if (IR_out == HIGH);
+//  {
+//    count++;
+//    state = false;
+//    Serial.print("Count: ");  
+//    Serial.println(count);  
+//    delay(100);
+//  }
+
+  if (digitalRead (IRSensor))
   {
-    sensoractive = 1;
+    state = true;
+    delay(100);
   }
   
   if (sensoractive == 1)
