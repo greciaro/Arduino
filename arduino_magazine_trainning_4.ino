@@ -23,15 +23,15 @@ void setup() {
 void loop() {
   
    motor.detach();
-  if (digitalRead(Lswitch) == LOW){ //"LOW" means that the switch has been activated
+  if (digitalRead(Lswitch) == 0){ //"0" means that the switch has been activated
     statusSensor = 1;
+//    Serial.println(digitalRead(Lswitch));
   }
 
   if (statusSensor == 1 && statusDoor == 0)
   {        
     count = count+1;
     Serial.println(count);
-    //Serial.print("\t");
     motor.attach(7);  //re-attach the servo to pin #7
     motor.write(0); // telling the motor to rotate continously (180 is full velocity in one direction, 0 full velocity in the other direction, 90 no movement)
     delay(600);  // motor will continue rotating for 0.6 seconds
