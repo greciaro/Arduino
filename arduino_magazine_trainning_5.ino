@@ -45,7 +45,7 @@ void loop() {
   {        
     motor.attach(7);  //re-attach the servo to pin #7
     motor.write(180); // telling the motor to rotate continously (180 is full velocity in one direction, 0 full velocity in the other direction, 90 no movement)
-    delay(600);  // motor will continue rotating for 0.8 seconds
+    delay(600);  // motor will continue rotating for 0.6 second
     motor.detach(); // telling the motor to stop
     statusDoor = 0;
     statusSensor = 0;
