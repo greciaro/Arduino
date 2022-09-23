@@ -9,9 +9,10 @@ int Lswitch = 2;
 int statusSensor = 0; //variable to store if the switch was activated
 int statusDoor = 0; // variable to store of the door is open or closed. open = 1 closed = 0
 int count = 0; //variable to store how many times the door was activated
-
-unsigned long previousMillis = 0;
-int interval=12000;
+//byte second;
+unsigned long time;
+//unsigned long previousMillis = 0;
+//int interval=12000;
 
 
 void setup() {
@@ -21,7 +22,8 @@ void setup() {
 }
 
 void loop() {
-  
+
+//  second++;
    motor.detach();
   if (digitalRead(Lswitch) == 0){ //"0" means that the switch has been activated
     statusSensor = 1;
@@ -39,17 +41,24 @@ void loop() {
     statusDoor = 1;
     statusSensor = 0;
     Serial.println("Door open");
+    Serial.print("Time passed (s):");
+    time = millis();
+    Serial.println(time/1000);
   }
 
     if (statusSensor == 1 && statusDoor == 1)
   {        
     motor.attach(7);  //re-attach the servo to pin #7
     motor.write(180); // telling the motor to rotate continously (180 is full velocity in one direction, 0 full velocity in the other direction, 90 no movement)
-    delay(600);  // motor will continue rotating for 0.6 second
+    delay(650);  // motor will continue rotating for 0.65 seconds
     motor.detach(); // telling the motor to stop
     statusDoor = 0;
     statusSensor = 0;
     Serial.println("Door closed");
+    Serial.print("Time passed (s):");
+    time = millis();
+    Serial.println(time/1000);
+//    Serial.println(second);
   }
     
 }
