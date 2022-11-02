@@ -34,7 +34,7 @@ void loop() {
     delay(3000);  // motor will remained stopped for 3 seconds
     motor.attach(7);  //re-attach the servo to pin #7
     motor.write(180); // telling the motor to rotate continously
-    delay(650);  // motor will continue rotating for 0.65 seconds
+    delay(900);  // motor will continue rotating for 0.65 seconds
     motor.detach(); // telling the motor to stop
     statusSensor = 0;
   } 
