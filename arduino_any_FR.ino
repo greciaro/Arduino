@@ -12,6 +12,7 @@ int number1 = 0; //intital state of the sensor
 int number2 = 0; //following state of the sensor
 int state = 0;
 int keystroke = 0;
+int flag = 0; //flag for innitial message
 unsigned long time;
 
 void setup() {
@@ -21,17 +22,20 @@ void setup() {
 }
 
 void loop() {
-
-Serial.println("Please enter your password: ");
-
-  keystroke = Serial.read();
   
+  if (keystroke == 0 && flag == 0){
+  Serial.println("Please enter the Fixed Ratio: ");
+  while (Serial.available() == 0) {
+  }
+  keystroke = Serial.read();
+  flag = 1;
+  }
 
 
-
-  if (keystroke>0){
+  if (keystroke>0 && flag == 0){
 
 Serial.println("Stating Fixed Ratio: ");
+Serial.println(keystroke);
   
 // do something based on keystroke recieved
 motor.detach();
