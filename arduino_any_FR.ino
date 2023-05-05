@@ -22,61 +22,53 @@ void setup() {
 }
 
 void loop() {
-  
   if (keystroke == 0 && flag == 0){
   Serial.println("Please enter the Fixed Ratio: ");
-  while (Serial.available() == 0) {
-  }
-  keystroke = Serial.read();
+    while (Serial.available() == 0) { 
+      motor.detach(); //to avoid the noise of the motor waiting
+    }
+  keystroke = Serial.parseInt();
   flag = 1;
-  }
-
-
-  if (keystroke>0 && flag == 0){
-
-Serial.println("Stating Fixed Ratio: ");
-Serial.println(keystroke);
-  
-// do something based on keystroke recieved
-motor.detach();
-  number1 = digitalRead (IRSensor);
-  delay(100);
-  number2 = digitalRead (IRSensor);
-  
-  if ((number1 - number2) == 1){
-    state = 1;
+  Serial.println("Stating Fixed Ratio: ");
+  Serial.println(keystroke);
   }
   
-  if (state == 1){
-    sensoractive++;
-    Serial.print("sensor activation: ");  
-    Serial.println(sensoractive);
-    state = 0;
-    number1 = 0;
-    number1 = 0;
-  }
-
-  if (sensoractive == keystroke)
-  {
-    count++;
-    Serial.print("openning #: ");
-    Serial.println(count);
-    Serial.print("Time passed (s):");
-    time = millis();
-    Serial.println(time/1000);
-    motor.attach(7);  //re-attach the servo to pin #7
-    motor.write(0); // telling the motor to rotate continously (180 is full velocity in one direction, 0 full velocity in the other direction, 90 no movement)
-    delay(600);  // motor will continue rotating for 0.5 seconds
-    motor.detach(); // telling the motor to stop
-    delay(3000);  // motor will remained stopped for 3 seconds
-    motor.attach(7);  //re-attach the servo to pin #7
-    motor.write(180); // telling the motor to rotate continously
-    delay(600);  // motor will continue rotating for 0.5 seconds
-    motor.detach(); // telling the motor to stop
-    sensoractive = 0;
-  } 
-
-}
+  if (keystroke>0 && flag == 1){ 
+    // do something based on keystroke recieved
+    motor.detach();
+    number1 = digitalRead (IRSensor);
+    delay(100);
+    number2 = digitalRead (IRSensor);
+    
+      if ((number1 - number2) == 1){
+        state = 1;
+      }
   
-  
+      if (state == 1){
+        sensoractive++;
+        Serial.print("sensor activation: ");  
+        Serial.println(sensoractive);
+        state = 0;
+        number1 = 0;
+      }
+
+      if (sensoractive == keystroke){
+        count++;
+        Serial.print("openning #: ");
+        Serial.println(count);
+        Serial.print("Time passed (s):");
+        time = millis();
+        Serial.println(time/1000);
+        motor.attach(8);  //re-attach the servo to pin #8
+        motor.write(0); // telling the motor to rotate continously (180 is full velocity in one direction, 0 full velocity in the other direction, 90 no movement)
+        delay(400);  // motor will continue rotating for 0.5 seconds
+        motor.detach(); // telling the motor to stop
+        delay(3000);  // motor will remained stopped for 3 seconds
+        motor.attach(8);  //re-attach the servo to pin #8
+        motor.write(180); // telling the motor to rotate continously
+        delay(600);  // motor will continue rotating for 0.7 seconds
+        motor.detach(); // telling the motor to stop
+        sensoractive = 0;
+        } 
+    } 
 }
